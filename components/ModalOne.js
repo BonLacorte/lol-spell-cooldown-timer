@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, TouchableOpacity, Modal, StyleSheet, Image } 
 import React, { useEffect, useState } from 'react'
 import ModalPicker from './ModalPicker'
 
-const ModalOne = () => {
+const ModalOne = ({ darkMode, setDarkMode }) => {
 
   const [ chooseName, setChooseName ] = useState()
   const [ chooseCooldown, setChooseCooldown ] = useState('0')
@@ -14,10 +14,6 @@ const ModalOne = () => {
 
   const changeModalVisibility = (bool) => {
     setIsModalVisible(bool)
-  }
-
-  const changeCountStatus = (bool) => {
-    setIsStarted(bool)
   }
 
   const setPhoto = (spell) => {
@@ -53,6 +49,38 @@ const ModalOne = () => {
       return () => clearTimeout(timer);
   });  
 
+  const styles = StyleSheet.create({
+    touchableOpacity: {
+        width:68,
+        height:68,
+        backgroundColor: '#FF6666',
+        borderRadius: 10,
+        borderWidth:2,
+        borderColor: '#ededed',
+    },
+    modal: {
+      backgroundColor: darkMode ? '#7b8084' : '#e5e5e5',
+      borderRadius: 25,
+    },
+    text: {
+      fontSize: 25,
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: darkMode ? '#B5B7BB' : '#7c7c7c',
+    },
+    container: {
+      flex: 1,
+      //backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      //padding: 20
+      paddingTop: 10
+    },
+    icon: {
+      borderRadius: 10
+    },
+  })
+
   const start = () => {
     setTimeLeft(chooseCooldown);
     clearTimeout(timer);
@@ -76,7 +104,7 @@ const ModalOne = () => {
         {/* <Text style={styles.text}>{chooseName}</Text> */}
         
       </TouchableOpacity>
-      <Modal
+      <Modal style={styles.modal}
         transparent={true}
         animationType='fade'
         visible={isModalVisible}
@@ -89,6 +117,8 @@ const ModalOne = () => {
           setCooldown={setCooldown}
           setName={setName}
           setStart={setStart}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
         />
       </Modal>
       {/* <Text style={styles.text}>{cooldownStart}</Text> */}
@@ -96,35 +126,5 @@ const ModalOne = () => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  touchableOpacity: {
-      width:64,
-      height:64,
-      backgroundColor: '#aaaaaa',
-      borderRadius: 10,
-      borderWidth:2,
-      borderColor: '#ff9819'
-  },
-  text: {
-    //marginVertical: 20,
-    fontSize: 25,
-    // flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // padding: 20,
-    color: 'white'
-  },
-  container: {
-    flex: 1,
-    //backgroundColor: '#3d3d3d',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20
-  },
-  icon: {
-    borderRadius: 10
-  },
-})
 
 export default ModalOne

@@ -3,11 +3,39 @@ import React from 'react'
 import { spells } from './constants' 
 
 
-const OPTIONS = ['barrier', 'flash']
+// const OPTIONS = ['barrier', 'flash']
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height 
 const ModalPicker = (props) => {
   
+  const styles = StyleSheet.create({
+    Container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    Modal: {
+        backgroundColor: 'white',
+        borderRadius: 10
+    },
+    touchableOpacity: {
+      justifyContent: 'center',
+      alignItems: 'stretch',
+      flexDirection: 'row',
+    },
+    text: {
+      margin: 20,
+      fontSize: 20,
+      fontWeight: 'bold'
+    },
+    scrollView: {
+      //flexDirection: 'row',
+    }, 
+    icon: {
+      borderRadius: 10
+    }
+})
+
   const onPressItem = (spell) => {
     props.changeModalVisibility(false)
     props.setPhoto(spell.uri)             // photo
@@ -28,10 +56,11 @@ const ModalPicker = (props) => {
       >
         <Image 
           style={styles.icon}
-          source={item.uri}></Image>
-        {/* <Text style={styles.text}>
+          source={item.uri}>
+        </Image>
+        <Text style={styles.text}>
           {item.name}
-        </Text> */}
+        </Text>
       </TouchableOpacity>
     )
   })
@@ -49,33 +78,5 @@ const ModalPicker = (props) => {
     </TouchableOpacity>
   )
 }
-
-
-const styles = StyleSheet.create({
-    Container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    Modal: {
-        backgroundColor: 'white',
-        borderRadius: 10
-    },
-    touchableOpacity: {
-      justifyContent: 'center',
-      
-    },
-    text: {
-      margin: 20,
-      fontSize: 20,
-      fontWeight: 'bold'
-    },
-    scrollView: {
-      flexDirection: 'row',
-    }, 
-    icon: {
-      borderRadius: 10
-    }
-})
 
 export default ModalPicker
